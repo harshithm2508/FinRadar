@@ -6,6 +6,10 @@ const transactionSchema = new mongoose.Schema({
         required: true, 
         trim: true
     },
+    description: {
+        type: String,
+        trim: true
+    },
     amount: {
         type: Number, 
         required: true,
@@ -17,7 +21,13 @@ const transactionSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ["food", "fashion", "income", "rent", "misc"]
+        enum: ["food", "fashion", "income", "rent", "misc", "entertainment", "investment"]
+    },
+    paymentMethod: {
+        type: String,
+        enum: ["cash", "upi", "debit_card", "amex_card"],
+        required: true
+        
     }},
     {
         timestamps: true
