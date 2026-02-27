@@ -20,7 +20,8 @@ app.use("/add", async (req, res) => {
             amount: body.amount,
             paymentMethod: body.paymentMethod,
             description: body.description,
-            category: body.category
+            category: body.category,
+            transactionDate: body.transactionDate
         })
 
         res.send("Transaction noted");

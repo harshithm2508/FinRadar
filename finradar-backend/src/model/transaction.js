@@ -28,6 +28,11 @@ const transactionSchema = new mongoose.Schema({
         enum: ["cash", "upi", "debit_card", "amex_card"],
         required: true
         
+    },
+
+    transactionDate: {
+        type: Date,
+        default: Date.now
     }},
     {
         timestamps: true
