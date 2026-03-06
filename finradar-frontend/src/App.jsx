@@ -1,7 +1,9 @@
 function App() {
   return(
     <div>
-      <p>Hello FinRadar</p>
+      <h1 className="text-3xl font-bold underline">
+        Hello FinRadar
+      </h1>
     </div>
   )
 }
