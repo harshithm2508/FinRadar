@@ -3,10 +3,12 @@ import connectDB from "./src/config/db.js";
 import transaction from "./src/model/transaction.js";
 import finances from "./src/model/finances.js"
 import dotenv from "dotenv";
+import cors from "cors";
 
 const app = express();
 
 dotenv.config();    //  makes the environmental variables accessible
+app.use(cors())
 app.use(express.json())     // this helps express to parse json files
 
 await connectDB();
