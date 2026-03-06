@@ -67,5 +67,44 @@ app.post("/add", async (req, res) => {
     }
 })
 
+app.get("/expense/present", async (req, res) => {
+
+    try {
+
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const week = Math.ceil(day / 7);
+
+        const finance = await finances.findOne({ year });
+
+        if (!finance) {
+            return res.json({
+                yearExpense: 0,
+                monthExpense: 0,
+                weekExpense: 0,
+                dayExpense: 0
+            });
+        }
+
+        const monthData = finance.months?.get(String(month));
+        const weekData = monthData?.weeks?.get(String(week));
+        const dayData = weekData?.days?.get(String(day));
+
+        res.json({
+            yearExpense: finance.expense || 0,
+            monthExpense: monthData?.expense || 0,
+            weekExpense: weekData?.expense || 0,
+            dayExpense: dayData?.expense || 0
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error retrieving present expenses");
+    }
+
+});
 
 app.listen(3000, () => console.log("Listening at port 3000"));
