@@ -109,4 +109,35 @@ app.get("/expense/present", async (req, res) => {
 
 });
 
+app.get("/transactions/today", async (req, res) => {
+    try {
+
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999);
+
+        const transactions = await transaction.find(
+            {
+                type: "expense",
+                transactionDate: {
+                    $gte: startOfDay,
+                    $lte: endOfDay
+                }
+            },
+            {
+                title: 1,
+                amount: 1,
+                _id: 0
+            }
+        );
+
+    res.json(transactions);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 app.listen(3000, () => console.log("Listening at port 3000"));
