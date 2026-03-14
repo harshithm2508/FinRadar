@@ -140,4 +140,44 @@ app.get("/transactions/today", async (req, res) => {
     }
 });
 
+app.get("/transactions/week", async (req, res) => {
+    try {
+
+        const today = new Date();
+        const dayOfMonth = today.getDate();
+
+        const weekNumber = Math.ceil(dayOfMonth / 7);
+
+        const startDay = (weekNumber - 1) * 7 + 1;
+        const endDay = Math.min(weekNumber * 7, 31);
+
+        const startDate = new Date(today.getFullYear(), today.getMonth(), startDay);
+        startDate.setHours(0,0,0,0);
+
+        const endDate = new Date(today.getFullYear(), today.getMonth(), endDay);
+        endDate.setHours(23,59,59,999);
+
+        const transactions = await transaction.find(
+        {
+            type: "expense",
+            transactionDate: {
+            $gte: startDate,
+            $lte: endDate
+            }
+        },
+        {
+            title: 1,
+            amount: 1,
+            _id: 0
+        }
+        );
+
+        res.json(transactions);
+
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
 app.listen(3000, () => console.log("Listening at port 3000"));
