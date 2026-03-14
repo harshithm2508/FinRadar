@@ -26,19 +26,19 @@ function Home() {
 
     return (
         <div className="text-black p-10">
-        <h2>Today's Expense: ₹{data.dayExpense}</h2>
-        <h2>This Week: ₹{data.weekExpense}</h2>
-        <h2>This Month: ₹{data.monthExpense}</h2>
-        <h2>This Year: ₹{data.yearExpense}</h2>
+            <h2>Today's Expense: ₹{data.dayExpense}</h2>
+            <h2>This Week: ₹{data.weekExpense}</h2>
+            <h2>This Month: ₹{data.monthExpense}</h2>
+            <h2>This Year: ₹{data.yearExpense}</h2>
 
-        <div className="mt-6">
-            <Link
-            to="/today"
-            className="text-blue-600 underline"
-            >
-            View Today's Transactions
-            </Link>
-        </div>
+            <div className="mt-6">
+                <div>
+                    <Link to="/today" className="text-blue-600 underline">  View Today's Transactions </Link>
+                </div>
+                <div>
+                    <Link to="/week" className="text-blue-600 underline">View This Week's Transactions</Link>
+                </div>
+            </div>
         </div>
     );
 }

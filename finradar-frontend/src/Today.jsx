@@ -22,8 +22,8 @@ function Today() {
     }
 
     return (
-        <div className="text-black p-10">
-        <h1 className="text-xl mb-4">Today's Transactions</h1>
+        <div className="text-gray-600 p-10">
+        <h1 className="text-lg text-black font-bold mb-4">Today's Transactions</h1>
 
         {transactions.length === 0 ? (
             <p>No expenses today</p>
